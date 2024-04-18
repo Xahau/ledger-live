@@ -2390,6 +2390,36 @@ export const cryptocurrenciesById: Record<CryptoCurrencyId, CryptoCurrency> = {
     ],
     keywords: ["xrp", "ripple"],
   },
+  xahau: {
+    type: "CryptoCurrency",
+    id: "xahau",
+    coinType: CoinType.XAHAU,
+    name: "XAH",
+    managerAppName: "XAH",
+    ticker: "XAH",
+    scheme: "ripple",
+    color: "#0E0143",
+    units: [
+      {
+        name: "XAH",
+        code: "XAH",
+        magnitude: 6,
+      },
+      {
+        name: "drop",
+        code: "drop",
+        magnitude: 0,
+      },
+    ],
+    family: "ripple",
+    explorerViews: [
+      {
+        tx: "https://xahauexplorer/explorer/$hash",
+        address: "https://xahauexplorer/explorer/$address",
+      },
+    ],
+    keywords: ["xah", "xahau"],
+  },
   rise: {
     type: "CryptoCurrency",
     id: "rise",
