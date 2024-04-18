@@ -120,6 +120,7 @@ export const inferManagerApp = (keyword: string): string => {
 const implTypePerFamily = {
   tron: "js",
   ripple: "js",
+  xahau: "js",
   ethereum: "js",
   polkadot: "js",
   bitcoin: "js",
