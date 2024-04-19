@@ -4,15 +4,15 @@
 [Ledger Devs Discord](https://developers.ledger.com/discord-pro),
 [Developer Portal](https://developers.ledger.com/)
 
-## @ledgerhq/hw-app-xrp
+## @ledgerhq/hw-app-xah
 
-Ledger Hardware Wallet XRP JavaScript bindings.
+Ledger Hardware Wallet XAH JavaScript bindings.
 
 ***
 
 ## Are you adding Ledger support to your software wallet?
 
-You may be using this package to communicate with the XRP Nano App.
+You may be using this package to communicate with the XAH Nano App.
 
 For a smooth and quick integration:
 
@@ -27,7 +27,7 @@ For a smooth and quick integration:
 
 #### Table of Contents
 
-*   [Xrp](#xrp)
+*   [Xah](#xah)
     *   [Parameters](#parameters)
     *   [Examples](#examples)
     *   [getAddress](#getaddress)
@@ -39,33 +39,33 @@ For a smooth and quick integration:
     *   [getAppConfiguration](#getappconfiguration)
         *   [Examples](#examples-3)
 
-### Xrp
+### Xah
 
-XRP API
+XAH API
 
 #### Parameters
 
 *   `transport` **Transport**&#x20;
-*   `scrambleKey`   (optional, default `"XRP"`)
+*   `scrambleKey`   (optional, default `"XAH"`)
 
 #### Examples
 
 ```javascript
 import Transport from "@ledgerhq/hw-transport-node-hid";
 // import Transport from "@ledgerhq/hw-transport-u2f"; // for browser
-import Xrp from "@ledgerhq/hw-app-xrp";
-import { encode } from 'ripple-binary-codec';
+import Xah from "@ledgerhq/hw-app-xah";
+import { encode } from 'xrpl-binary-codec-prerelease';
 
 function establishConnection() {
     return Transport.create()
-        .then(transport => new Xrp(transport));
+        .then(transport => new Xah(transport));
 }
 
-function fetchAddress(xrp) {
-    return xrp.getAddress("44'/144'/0'/0/0");
+function fetchAddress(xah) {
+    return xah.getAddress("44'/144'/0'/0/0");
 }
 
-function signTransaction(xrp, deviceData, seqNo) {
+function signTransaction(xah, deviceData, seqNo) {
     let transactionJSON = {
         TransactionType: "Payment",
         Account: deviceData.address,
@@ -80,23 +80,23 @@ function signTransaction(xrp, deviceData, seqNo) {
     const transactionBlob = encode(transactionJSON);
 
     console.log('Sending transaction to device for approval...');
-    return xrp.signTransaction("44'/144'/0'/0/0", transactionBlob);
+    return xah.signTransaction("44'/144'/0'/0/0", transactionBlob);
 }
 
-function prepareAndSign(xrp, seqNo) {
-    return fetchAddress(xrp)
-        .then(deviceData => signTransaction(xrp, deviceData, seqNo));
+function prepareAndSign(xah, seqNo) {
+    return fetchAddress(xah)
+        .then(deviceData => signTransaction(xah, deviceData, seqNo));
 }
 
 establishConnection()
-    .then(xrp => prepareAndSign(xrp, 123))
+    .then(xah => prepareAndSign(xah, 123))
     .then(signature => console.log(`Signature: ${signature}`))
     .catch(e => console.log(`An error occurred (${e.message})`));
 ```
 
 #### getAddress
 
-get XRP address for a given BIP 32 path.
+get XAH address for a given BIP 32 path.
 
 ##### Parameters
 
@@ -108,7 +108,7 @@ get XRP address for a given BIP 32 path.
 ##### Examples
 
 ```javascript
-const result = await xrp.getAddress("44'/144'/0'/0/0");
+const result = await xah.getAddress("44'/144'/0'/0/0");
 const { publicKey, address } = result;
 ```
 
@@ -116,7 +116,7 @@ Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 
 #### signTransaction
 
-sign a XRP transaction with a given BIP 32 path
+sign a XAH transaction with a given BIP 32 path
 
 The rawTxHex parameter is the serialized transaction blob represented as
 hex.
@@ -125,26 +125,26 @@ hex.
 
 *   `path` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** a path in BIP 32 format
 *   `rawTxHex` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** a raw hex string representing a serialized transaction blob.
-    This parameter can be encoded using [ripple-binary-codec](https://www.npmjs.com/package/ripple-binary-codec).
+    This parameter can be encoded using [xrpl-binary-codec-prerelease](https://www.npmjs.com/package/xrpl-binary-codec-prerelease).
     See <https://xrpl.org/serialization.html> for more documentation on the serialization format.
 *   `ed25519` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)?** optionally enable or not the ed25519 curve (secp256k1 is default)
 
 ##### Examples
 
 ```javascript
-const signature = await xrp.signTransaction("44'/144'/0'/0/0", "12000022800000002400000002614000000001315D3468400000000000000C73210324E5F600B52BB3D9246D49C4AB1722BA7F32B7A3E4F9F2B8A1A28B9118CC36C48114F31B152151B6F42C1D61FE4139D34B424C8647D183142ECFC1831F6E979C6DA907E88B1CAD602DB59E2F");
+const signature = await xah.signTransaction("44'/144'/0'/0/0", "12000022800000002400000002614000000001315D3468400000000000000C73210324E5F600B52BB3D9246D49C4AB1722BA7F32B7A3E4F9F2B8A1A28B9118CC36C48114F31B152151B6F42C1D61FE4139D34B424C8647D183142ECFC1831F6E979C6DA907E88B1CAD602DB59E2F");
 ```
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)<[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** a signature as hex string
 
 #### getAppConfiguration
 
-get the version of the XRP app installed on the hardware device
+get the version of the XAH app installed on the hardware device
 
 ##### Examples
 
 ```javascript
-const result = await xrp.getAppConfiguration();
+const result = await xah.getAppConfiguration();
 
 {
   "version": "1.0.3"
