@@ -116,7 +116,9 @@ const signOperation: SignOperationFnSignature<Transaction> = ({ account, transac
               recipients: [transaction.recipient],
               date: new Date(),
               transactionSequenceNumber: nextSequenceNumber,
-              extra: {},
+              extra: {
+                currencyId: account.currency.id
+              },
             };
 
             o.next({
@@ -143,7 +145,7 @@ const signOperation: SignOperationFnSignature<Transaction> = ({ account, transac
   );
 
 const broadcast = async ({ signedOperation: { signature, operation } }): Promise<Operation> => {
-  const submittedPayment = await submit(signature);
+  const submittedPayment = await submit(signature, getEndpoint(operation.extra.currencyId));
 
   if (
     submittedPayment.engine_result !== "tesSUCCESS" &&
