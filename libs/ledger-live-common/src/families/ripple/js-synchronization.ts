@@ -8,8 +8,8 @@ import { NEW_ACCOUNT_ERROR_MESSAGE } from "./bridge/js";
 import { getEnv } from "@ledgerhq/live-env";
 import { TxXRPL } from "./types.api";
 
-const getEndpoint = (info: AccountShapeInfo) => {
-  return info.currency.id.toUpperCase() === 'XAHAU'
+export const getEndpoint = (info: AccountShapeInfo | string) => {
+  return (typeof info === 'string' ? info : info.currency.id).toUpperCase() === 'XAHAU'
     ? getEnv('API_XAHAU_RPC')
     : getEnv('API_RIPPLE_RPC')
 }
