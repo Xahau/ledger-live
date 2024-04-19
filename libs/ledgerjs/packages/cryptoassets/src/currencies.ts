@@ -2414,8 +2414,8 @@ export const cryptocurrenciesById: Record<CryptoCurrencyId, CryptoCurrency> = {
     family: "ripple",
     explorerViews: [
       {
-        tx: "https://xahauexplorer/explorer/$hash",
-        address: "https://xahauexplorer/explorer/$address",
+        tx: "https://xahauexplorer.com/explorer/$hash",
+        address: "https://xahauexplorer.com/explorer/$address",
       },
     ],
     keywords: ["xah", "xahau"],
