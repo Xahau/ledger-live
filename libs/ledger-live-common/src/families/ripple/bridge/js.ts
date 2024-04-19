@@ -64,6 +64,11 @@ const signOperation: SignOperationFnSignature<Transaction> = ({ account, transac
           try {
             const tag = transaction.tag ? transaction.tag : undefined;
             const nextSequenceNumber = await getNextValidSequence(account);
+            const NetworkID = // XRPL mainnet = 0, other networks may need NetworkID
+              transaction.networkInfo?.networkId || 0 > 1024
+                ? transaction.networkInfo?.networkId
+                : undefined;
+
             const payment = {
               TransactionType: "Payment",
               Account: account.freshAddress,
@@ -71,6 +76,7 @@ const signOperation: SignOperationFnSignature<Transaction> = ({ account, transac
               Destination: transaction.recipient,
               DestinationTag: tag,
               Fee: fee.toString(),
+              NetworkID,
               Flags: 2147483648,
               Sequence: nextSequenceNumber,
               LastLedgerSequence: (await getLedgerIndex()) + LEDGER_OFFSET,
@@ -214,6 +220,7 @@ const prepareTransaction = async (a: Account, t: Transaction): Promise<Transacti
       networkInfo = {
         family: "ripple",
         serverFee,
+        networkId: info.info?.network_id || 0,
         baseReserve: new BigNumber(0), // NOT USED. will refactor later.
       };
     } catch (e) {

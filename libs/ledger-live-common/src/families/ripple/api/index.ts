@@ -5,6 +5,8 @@ import { getEnv } from "@ledgerhq/live-env";
 import { retry } from "../../../promise";
 import { NEW_ACCOUNT_ERROR_MESSAGE } from "../bridge/js";
 
+// TODO: Pick different RPC endpoint if on another XRPL Protocol based chain
+
 const defaultEndpoint = () => getEnv("API_RIPPLE_RPC");
 
 export const connectionTimeout = 30 * 1000; // default connectionTimeout is 2s and make the specs bot failed
