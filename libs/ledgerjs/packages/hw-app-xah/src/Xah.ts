@@ -7,7 +7,7 @@ import BIPPath from "bip32-path";
  * import Transport from "@ledgerhq/hw-transport-node-hid";
  * // import Transport from "@ledgerhq/hw-transport-u2f"; // for browser
  * import Xah from "@ledgerhq/hw-app-xah";
- * import { encode } from 'ripple-binary-codec';
+ * import { encode } from 'xrpl-binary-codec-prerelease';
  *
  * function establishConnection() {
  *     return Transport.create()
@@ -120,7 +120,7 @@ export default class Xah {
    *
    * @param path a path in BIP 32 format
    * @param rawTxHex a raw hex string representing a serialized transaction blob.
-   *        This parameter can be encoded using [ripple-binary-codec](https://www.npmjs.com/package/ripple-binary-codec).
+   *        This parameter can be encoded using [xrpl-binary-codec-prerelease](https://www.npmjs.com/package/xrpl-binary-codec-prerelease).
    *        See https://xahl.org/serialization.html for more documentation on the serialization format.
    * @param ed25519 optionally enable or not the ed25519 curve (secp256k1 is default)
    * @return a signature as hex string
