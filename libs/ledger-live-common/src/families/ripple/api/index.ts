@@ -50,7 +50,6 @@ export const getAccountInfo = async (
   current?: boolean,
   endpoint?: string,
 ): Promise<AccountInfo> => {
-  console.log('getAccountInfo', recipient, current, endpoint)
   const res = async () => {
     const res = await network({
       method: "POST",
@@ -81,7 +80,6 @@ export const getAccountInfo = async (
 };
 
 export const getServerInfo = async (endpoint?: string): Promise<any> => {
-  console.log('getServerInfo', endpoint)
   const res = async () => {
     const res = await network({
       method: "POST",
@@ -109,7 +107,6 @@ export const getServerInfo = async (endpoint?: string): Promise<any> => {
 };
 
 export const getTransactions = async (address: string, options: any | undefined, endpoint?: string): Promise<any> => {
-  console.log('getTransactions', address, options, endpoint)
   const res = async () => {
     const res = await network({
       method: "POST",
@@ -138,7 +135,6 @@ export const getTransactions = async (address: string, options: any | undefined,
 };
 
 export default async function getLedgerIndex(endpoint?: string): Promise<number> {
-  console.log('getLedgerIndex', endpoint)
   const res = async () => {
     const ledgerResponse = await network({
       method: "POST",
