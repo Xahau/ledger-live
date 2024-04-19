@@ -1,4 +1,4 @@
-import BinaryCodec from "ripple-binary-codec";
+import BinaryCodec from "xrpl-binary-codec-prerelease";
 import Xrp from "@ledgerhq/hw-app-xrp";
 import Transport from "@ledgerhq/hw-transport";
 import type { CryptoCurrency } from "@ledgerhq/types-cryptoassets";
