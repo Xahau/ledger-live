@@ -7,18 +7,17 @@ import { NEW_ACCOUNT_ERROR_MESSAGE } from "../bridge/js";
 
 // TODO: Pick different RPC endpoint if on another XRPL Protocol based chain
 
-const defaultEndpoint = () => getEnv("API_RIPPLE_RPC");
-
 export const connectionTimeout = 30 * 1000; // default connectionTimeout is 2s and make the specs bot failed
 
 const rippleUnit = getCryptoCurrencyById("ripple").units[0];
 
 export const parseAPIValue = (value: string): BigNumber => parseCurrencyUnit(rippleUnit, value);
 
-export const submit = async (signature: string): Promise<any> => {
+export const submit = async (signature: string, endpoint?: string): Promise<any> => {
+  console.log('submit', signature, window, endpoint)
   const res = await network({
     method: "POST",
-    url: `${defaultEndpoint()}`,
+    url: endpoint || getEnv("API_RIPPLE_RPC"),
     data: {
       method: "submit",
       params: [
@@ -49,11 +48,13 @@ type AccountInfo = {
 export const getAccountInfo = async (
   recipient: string,
   current?: boolean,
+  endpoint?: string,
 ): Promise<AccountInfo> => {
+  console.log('getAccountInfo', recipient, current, endpoint)
   const res = async () => {
     const res = await network({
       method: "POST",
-      url: `${defaultEndpoint()}`,
+      url: endpoint || getEnv("API_RIPPLE_RPC"),
       data: {
         method: "account_info",
         params: [
@@ -79,11 +80,12 @@ export const getAccountInfo = async (
   });
 };
 
-export const getServerInfo = async (endpointConfig?: string | null | undefined): Promise<any> => {
+export const getServerInfo = async (endpoint?: string): Promise<any> => {
+  console.log('getServerInfo', endpoint)
   const res = async () => {
     const res = await network({
       method: "POST",
-      url: endpointConfig ?? `${defaultEndpoint()}`,
+      url: endpoint || getEnv("API_RIPPLE_RPC"),
       data: {
         method: "server_info",
         params: [
@@ -106,11 +108,12 @@ export const getServerInfo = async (endpointConfig?: string | null | undefined):
   });
 };
 
-export const getTransactions = async (address: string, options: any | undefined): Promise<any> => {
+export const getTransactions = async (address: string, options: any | undefined, endpoint?: string): Promise<any> => {
+  console.log('getTransactions', address, options, endpoint)
   const res = async () => {
     const res = await network({
       method: "POST",
-      url: `${defaultEndpoint()}`,
+      url: endpoint || getEnv("API_RIPPLE_RPC"),
       data: {
         method: "account_tx",
         params: [
@@ -134,11 +137,12 @@ export const getTransactions = async (address: string, options: any | undefined)
   });
 };
 
-export default async function getLedgerIndex(): Promise<number> {
+export default async function getLedgerIndex(endpoint?: string): Promise<number> {
+  console.log('getLedgerIndex', endpoint)
   const res = async () => {
     const ledgerResponse = await network({
       method: "POST",
-      url: `${defaultEndpoint()}`,
+      url: endpoint || getEnv("API_RIPPLE_RPC"),
       data: {
         method: "ledger",
         params: [
