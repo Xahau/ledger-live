@@ -2387,6 +2387,14 @@ export const cryptocurrenciesById: Record<CryptoCurrencyId, CryptoCurrency> = {
         tx: "https://bithomp.com/explorer/$hash",
         address: "https://bithomp.com/explorer/$address",
       },
+      {
+        tx: "https://xrpscan.com/tx/$hash",
+        address: "https://xrpscan.com/account/$address",
+      },
+      {
+        tx: "https://xrplwin.com/tx/$hash",
+        address: "https://xrplwin.com/account/$address",
+      },
     ],
     keywords: ["xrp", "ripple"],
   },
@@ -2416,6 +2424,14 @@ export const cryptocurrenciesById: Record<CryptoCurrencyId, CryptoCurrency> = {
       {
         tx: "https://xahauexplorer.com/explorer/$hash",
         address: "https://xahauexplorer.com/explorer/$address",
+      },
+      {
+        tx: "https://xahau.xrplwin.com/tx/$hash",
+        address: "https://xahau.xrplwin.com/account/$address",
+      },
+      {
+        tx: "https://xahscan.com/tx/$hash",
+        address: "https://xahscan.com/account/$address",
       },
     ],
     keywords: ["xah", "xahau"],
