@@ -2395,7 +2395,7 @@ export const cryptocurrenciesById: Record<CryptoCurrencyId, CryptoCurrency> = {
     id: "xahau",
     coinType: CoinType.XAHAU,
     name: "Xahau",
-    managerAppName: "Xahau",
+    managerAppName: "XAH",
     ticker: "XAH",
     scheme: "ripple",
     color: "#0E0143",
